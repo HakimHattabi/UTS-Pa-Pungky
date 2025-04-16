@@ -10,16 +10,16 @@ class DatabaseZakat:
         self.cursor = None
         
         try:
+            # Pertama, connect tanpa database tertentu
             self.connection = mysql.connector.connect(
                 host='localhost',
-                user='root',  # ganti dengan username MySQL Anda
-                password='',  # ganti dengan password MySQL Anda
-                database='db_zakat'  # ganti jika ingin menggunakan nama database lain
+                user='root',    # ganti dengan username MySQL Anda
+                password='',     # ganti dengan password MySQL Anda
             )
             
             if self.connection.is_connected():
                 self.cursor = self.connection.cursor()
-                print("Berhasil terhubung ke MySQL database")
+                print("Berhasil terhubung ke MySQL server")
                 
                 # Buat database jika belum ada
                 self.cursor.execute("CREATE DATABASE IF NOT EXISTS db_zakat")
@@ -40,7 +40,7 @@ class DatabaseZakat:
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
                 """)
-                print("Tabel pembayar_zakat siap digunakan")
+                print("Database db_zakat dan tabel pembayar_zakat siap digunakan")
                 
         except Error as e:
             print(f"Error saat menghubungkan ke database: {e}")
